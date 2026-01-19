@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-do list</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <h1>To-do list</h1>
+    <button>Criar Tarefa</button>
+</header>
+
+<main>
+
+    <section id="lista-tarefas">
+        <h2>Minhas Tarefas</h2>
+
+        <div class="lista">
+
+            <!-- bloco principal -->
+            <div class="lista-principal">
+                <button class="status">A fazer</button>
+                <h3 class="titulo">Estudar HTML</h3>
+                <button class="excluir">Excluir</button>
+            </div>
+
+            <!-- informações secundárias -->
+            <div class="lista-info">
+                <p><strong>Categoria:</strong> Estudos</p>
+                <p><strong>Data limite:</strong> 20/01/2026</p>
+            </div>
+
+            <!-- descrição (oculta) -->
+            <div class="lista-descricao">
+                <p>
+                    Revisar estrutura semântica, formulários e boas práticas de HTML.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="formulario-tarefas">
+        <h2>Nova Tarefa</h2>
+
+        <form>
+            <label for="titulo">Título:</label>
+            <input type="text" id="titulo" name="titulo" required>
+
+            <label for="descricao">Descrição:</label>
+            <textarea id="descricao" name="descricao"></textarea>
+
+            <label for="status">Status:</label>
+            <select id="status" name="status" required>
+                <option value="pendente">Pendente</option>
+                <option value="em_andamento">Em andamento</option>
+                <option value="concluido">Concluído</option>
+            </select>
+
+            <label for="datalimite">Data limite:</label>
+            <input type="date" id="datalimite" name="datalimite">
+
+            <label for="categoria">Categoria:</label>
+            <select id="categoria" name="categoriaId">
+                <option value="">Selecione uma categoria</option>
+            </select>
+
+            <button type="submit">Salvar</button>
+            <button type="button">Cancelar</button>
+        </form>
+    </section>
+
+</main>
+
+</body>
+</html>
