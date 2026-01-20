@@ -4,3 +4,76 @@
   padding: 0;
   font-family: Arial, sans-serif;
 }
+
+body {
+  background-color: #f4f4f6;  
+}
+
+main {
+  max-width: 900px;          
+  margin: 40px auto;    /* centraliza na horizontal */
+}
+
+
+.lista {
+  background-color: #ffffff;
+  padding: 16px;
+  border-radius: 8px;
+
+  display: flex;            /* Ativa o flexbox */
+  flex-direction: column;   /* Organiza os filhos em coluna */
+  gap: 8px;
+  margin-bottom: 16px;      /* espaço entre uma tarefa e outra */
+}
+
+.bloco-principal {
+  display: flex;
+  align-items: center;   /* alinha tudo no meio */
+  gap: 12px;
+}
+
+.titulo {
+  flex: 1;               /* faz o título ocupar o centro */
+  font-size: 18px;
+}
+
+.bloco-info {
+  display: flex;
+  gap: 16px;
+  font-size: 14px;
+  color: #555;
+}
+
+.bloco-descricao-oculta {
+  display: none;
+  font-size: 14px;
+  color: #333;
+  border-top: 1px solid #eee;
+  padding-top: 8px;
+}
+
+.status {
+  padding: 6px 12px;
+  border-radius: 20px;
+  border: none;
+  background-color: #e0e0e0;
+  font-size: 0.85rem;
+}
+
+
+.excluir {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 0.85rem;
+  color: #d11a2a;
+}
+
+/* efeito simples ao passar o mouse */
+.status:hover {
+  background-color: #cfcfcf;
+}
+
+.excluir:hover {
+  text-decoration: underline;
+}
