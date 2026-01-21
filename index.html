@@ -1,76 +1,92 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To-do list</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-do list</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js"></script>
 </head>
 <body>
 
-<header>
-    <h1>To-do list</h1>
-    <button>Criar Tarefa</button>
-</header>
-
 <main>
 
-    <section id="lista-tarefas">
-        <h2>Minhas Tarefas</h2>
+  <!-- CARD DA LISTA DE TAREFAS -->
+  <section id="lista-tarefas">
+    <div class="card">
 
-      <article class="lista">
+      <header class="card-header">
+        <h2>Minha To-do List</h2>
+      </header>
 
-            <!-- bloco principal -->
-             ]<div class="bloco-principal">
-                <button class="status" aria-label="Alterar status">⏳</button>
-                <h3 class="titulo">Estudar HTML</h3>
-                <button class="excluir" aria-label="Excluir tarefa">🗑️</button>
-            </div>
+      <ul class="lista-tarefas">
 
-           <!-- informações secundárias -->
-            <div class="bloco-info">
-                <span class="categoria">Estudos</span>
-                <time class="data-limite" datetime="2026-01-20">
-                    20/01/2026</time>
-                </div>
-
-           <!-- descrição (oculta) -->
-            <div class="bloco-descricao-oculta">
-                <p> Revisar estrutura semântica, formulários e boas práticas de HTML.</p>
-            </div>
+        <!-- exemplo de tarefa concluída -->
         
-        </article>
-    </section>
+        <li class="tarefa concluida">
+          <button class="check" aria-label="Marcar como concluída"></button>
 
-    <section id="formulario-tarefas">
-        <h2>Nova Tarefa</h2>
+          <div class="conteudo">
+            <span class="titulo">Estudar HTML</span>
 
-        <form>
-            <label for="titulo">Título:</label>
-            <input type="text" id="titulo" name="titulo" required>
+            <div class="descricao">
+              Revisar estrutura semântica, formulários e boas práticas de HTML.
+            </div>
+          </div>
 
-            <label for="descricao">Descrição:</label>
-            <textarea id="descricao" name="descricao"></textarea>
+          <span class="categoria">Estudos</span>
+          <button class="excluir" aria-label="Excluir tarefa">🗑️</button>
+        </li>
 
-            <label for="status">Status:</label>
-            <select id="status" name="status" required>
-                <option value="pendente">Pendente</option>
-                <option value="em_andamento">Em andamento</option>
-                <option value="concluido">Concluído</option>
-            </select>
+        <!-- exemplo de tarefa NÃO concluída -->
+         <li class="tarefa">
+          <button class="check" aria-label="Marcar como concluída"></button>
+          
+          <div class="conteudo">
+            <span class="titulo">Consulta Medica, dia 10/02</span>
 
-            <label for="datalimite">Data limite:</label>
-            <input type="date" id="datalimite" name="datalimite">
+            <div class="descricao">
+            exame de sangue, ás 9h da manhã, no postinho da cidade
+          </div>
+        </div>
 
-            <label for="categoria">Categoria:</label>
-            <select id="categoria" name="categoriaId">
-                <option value="">Selecione uma categoria</option>
-            </select>
+        <span class="categoria">Saúde</span>
+        <button class="excluir" aria-label="Excluir tarefa">🗑️</button>
+      </li>
 
-            <button type="submit">Salvar</button>
-            <button type="button">Cancelar</button>
-        </form>
-    </section>
+
+      </ul>
+
+    </div>
+  </section>
+
+  <!-- CARD DO FORMULÁRIO -->
+  <section id="formulario-tarefas">
+    <div class="card">
+
+      <h2>Criar Tarefa</h2>
+
+      <form>
+
+        <label for="titulo">Título</label>
+        <input type="text" id="titulo" required>
+
+        <label for="descricao">Descrição (opcional)</label>
+        <textarea id="descricao"></textarea>
+
+        <label for="categoria">Categoria</label>
+        <select id="categoria">
+          <option>Estudos</option>
+          <option>Saúde</option>
+          <option>Organização</option>
+        </select>
+
+        <button type="submit">Salvar</button>
+
+      </form>
+
+    </div>
+  </section>
 
 </main>
 
