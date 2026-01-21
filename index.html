@@ -18,29 +18,28 @@
     <section id="lista-tarefas">
         <h2>Minhas Tarefas</h2>
 
-        <div class="lista">
+      <article class="lista">
 
             <!-- bloco principal -->
-            <div class="bloco-principal">
-                <button class="status">A fazer</button>
-                <h2 class="titulo">Estudar HTML</h2>
-                <button class="excluir">Excluir</button>
+             ]<div class="bloco-principal">
+                <button class="status" aria-label="Alterar status">⏳</button>
+                <h3 class="titulo">Estudar HTML</h3>
+                <button class="excluir" aria-label="Excluir tarefa">🗑️</button>
             </div>
 
-            <!-- informações secundárias -->
+           <!-- informações secundárias -->
             <div class="bloco-info">
-                <p><strong>Categoria:</strong> Estudos</p>
-                <p><strong>Data limite:</strong> 20/01/2026</p>
-            </div>
+                <span class="categoria">Estudos</span>
+                <time class="data-limite" datetime="2026-01-20">
+                    20/01/2026</time>
+                </div>
 
-            <!-- descrição (oculta) -->
+           <!-- descrição (oculta) -->
             <div class="bloco-descricao-oculta">
-                <p>
-                    Revisar estrutura semântica, formulários e boas práticas de HTML.
-                </p>
+                <p> Revisar estrutura semântica, formulários e boas práticas de HTML.</p>
             </div>
-
-        </div>
+        
+        </article>
     </section>
 
     <section id="formulario-tarefas">
