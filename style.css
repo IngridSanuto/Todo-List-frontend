@@ -21,6 +21,7 @@ main {
   padding: 0 16px;
 
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: flex-start;
   gap: 32px;
@@ -44,6 +45,13 @@ main {
   width: 380px; 
 }
 
+.lista-vazia {
+  text-align: center;
+  color: #9ca3af;
+  font-size: 14px;
+  margin-top: 20px;
+}
+
 
 /* ===== HEADER DO CARD ===== */
 
@@ -65,19 +73,22 @@ main {
   display: flex;
   flex-direction: column;
   gap: 12px;
+
+  max-height: 420px; /* controla quantas tarefas aparecem */
+  overflow-y: auto; /* ativa o scroll vertical */
 }
 
 .tarefa {
   display: flex;
   align-items: center;
   gap: 12px;
-
+  cursor: pointer;
   padding: 12px;
   border-radius: 10px;
 }
 
 .tarefa:hover {
-  background-color: #f4f4f4;
+  background-color: #f4f4f5;
 }
 
 .check {
@@ -99,7 +110,11 @@ main {
 
 .tarefa.concluida .titulo {
   text-decoration: line-through;
-  color: #999;
+  color: #9ca3af;
+}
+
+.tarefa.concluida {
+  opacity: 0.7;
 }
 
 .tarefa {
@@ -125,15 +140,17 @@ main {
 /* DESCRIÇÃO OCULTA */
 
 .descricao {
-  display: none;
   font-size: 14px;
   margin-top: 6px;
   color: #555;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
 }
 
 /* futuramente JS adiciona essa classe */
 .tarefa.aberta .descricao {
-  display: block;
+  max-height: 200px;
 }
 
 /* CATEGORIA */
@@ -157,6 +174,14 @@ main {
   background-color: #ebe6e5;
   cursor: pointer;
 }
+
+.aviso-scroll {
+  margin-top: 12px;
+  font-size: 13px;
+  color: #9ca3af; /* cinza clarinho */
+  text-align: center;
+}
+
 
 /* ===== FORMULÁRIO ===== */
 
@@ -191,4 +216,10 @@ button[type="submit"] {
   background-color: #6d4ae6;
   color: white;
   cursor: pointer;
+}
+
+@media (min-width: 768px) {
+  main {
+    flex-direction: row;
+  }
 }

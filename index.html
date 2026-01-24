@@ -13,49 +13,57 @@
 
   <!-- CARD DA LISTA DE TAREFAS -->
   <section id="lista-tarefas">
-    <div class="card">
 
       <header class="card-header">
         <h2>Minha To-do List</h2>
       </header>
 
-      <ul class="lista-tarefas">
+    <div class="card">
+
+      <p class="lista-vazia">
+        Nenhuma tarefa cadastrada 
+      </p>
+ 
+      <div class="lista tarefas">
 
         <!-- exemplo de tarefa concluída -->
         
-        <li class="tarefa concluida">
+        <article class="tarefa concluida">
           <button class="check" aria-label="Marcar como concluída"></button>
 
           <div class="conteudo">
-            <span class="titulo">Estudar HTML</span>
+            <h3 class="titulo">Estudar HTML</h3>
 
-            <div class="descricao">
+            <p class="descricao">
               Revisar estrutura semântica, formulários e boas práticas de HTML.
-            </div>
+            </p>
           </div>
 
           <span class="categoria">Estudos</span>
           <button class="excluir" aria-label="Excluir tarefa">🗑️</button>
-        </li>
+        </article>
 
         <!-- exemplo de tarefa NÃO concluída -->
-         <li class="tarefa">
+        <article class="tarefa">
           <button class="check" aria-label="Marcar como concluída"></button>
           
           <div class="conteudo">
-            <span class="titulo">Consulta Medica, dia 10/02</span>
+            <h3 class="titulo">Consulta Medica, dia 10/02</h3>
 
-            <div class="descricao">
-            exame de sangue, ás 9h da manhã, no postinho da cidade
-          </div>
-        </div>
+            <p class="descricao">
+              exame de sangue, ás 9h da manhã, no postinho da cidade
+            </p>
+         </div>
 
-        <span class="categoria">Saúde</span>
-        <button class="excluir" aria-label="Excluir tarefa">🗑️</button>
-      </li>
+         <span class="categoria">Saúde</span>
+         <button class="excluir" aria-label="Excluir tarefa">🗑️</button>
+       </article>
 
+       <p class="aviso-scroll">
+          Para ver as demais tarefas, role o card para baixo ⬇️
+       </p>
 
-      </ul>
+      </div>
 
     </div>
   </section>
