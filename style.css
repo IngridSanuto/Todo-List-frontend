@@ -23,7 +23,7 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   gap: 32px;
 }
 
@@ -221,5 +221,6 @@ button[type="submit"] {
 @media (min-width: 768px) {
   main {
     flex-direction: row;
+    align-items: flex-start;
   }
 }
