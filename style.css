@@ -74,7 +74,7 @@ main {
   flex-direction: column;
   gap: 12px;
 
-  max-height: 420px; /* controla quantas tarefas aparecem */
+  max-height: 350px; /* controla quantas tarefas aparecem */
   overflow-y: auto; /* ativa o scroll vertical */
 }
 
@@ -176,10 +176,11 @@ main {
 }
 
 .aviso-scroll {
-  margin-top: 12px;
-  font-size: 13px;
-  color: #9ca3af; /* cinza clarinho */
+  display: none;
+  font-size: 0.9rem;
   text-align: center;
+  margin-top: 8px;
+  opacity: 0.8;
 }
 
 

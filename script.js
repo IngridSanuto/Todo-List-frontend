@@ -1,69 +1,155 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener('DOMContentLoaded', () => {
 
-  // pega elementos principais
-  const lista = document.querySelector(".lista-tarefas");
-  const mensagemVazia = document.querySelector(".lista-vazia");
-  const avisoScroll = document.querySelector(".aviso-scroll");
+  const listaContainer = document.getElementById('lista-tarefas-container');
+  const avisoScroll = document.querySelector('.aviso-scroll');
+  const mensagemVazia = document.querySelector('.lista-vazia');
+  const form = document.getElementById('form-tarefa');
 
-  // pega todas as tarefas
-  let tarefas = document.querySelectorAll(".tarefa");
+  // GET — carregar tarefas
+  function carregarTarefas() {
+    fetch('http://localhost:3000/tarefas')
+      .then(res => res.json())
+      .then(tarefas => {
+        listaContainer.innerHTML = '';
 
-  // FUNÇÃO SIMPLES DE VERIFICAÇÃO
-  function verificarMensagens() {
+        if (tarefas.length === 0) {
+          mensagemVazia.style.display = 'block';
+          avisoScroll.style.display = 'none';
+          return;
+        }
 
-    // atualiza a lista de tarefas
-    tarefas = document.querySelectorAll(".tarefa");
+        mensagemVazia.style.display = 'none';
 
-    // lista vazia
-    if (tarefas.length === 0) {
-      mensagemVazia.style.display = "block";
-    } else {
-      mensagemVazia.style.display = "none";
-    }
+        tarefas.forEach(tarefa => {
+          const article = document.createElement('article');
+          article.classList.add('tarefa');
+          article.dataset.id = tarefa.id;
 
-    // aviso de scroll
-    if (tarefas.length > 5) {
-      avisoScroll.style.display = "block";
-    } else {
-      avisoScroll.style.display = "none";
-    }
+          if (tarefa.status === 'concluída') {
+            article.classList.add('concluida');
+          }
+
+          article.innerHTML = `
+            <button class="check" aria-label="Marcar como concluída"></button>
+
+            <div class="conteudo">
+              <h3 class="titulo">${tarefa.titulo}</h3>
+              <p class="descricao">${tarefa.descricao || ''}</p>
+            </div>
+
+            <span class="categoria">
+              ${tarefa.categoria?.nome || 'Sem categoria'}
+            </span>
+
+            <button class="excluir" aria-label="Excluir tarefa">
+              <i class="fa-solid fa-trash-can"></i>
+            </button>
+          `;
+
+          listaContainer.appendChild(article);
+        });
+
+        // aviso de scroll
+        avisoScroll.style.display = tarefas.length > 5 ? 'block' : 'none';
+      })
+      .catch(err => console.error('Erro no GET:', err));
   }
 
-  // ABRIR / FECHAR DESCRIÇÃO
-  tarefas.forEach(function (tarefa) {
-    tarefa.addEventListener("click", function () {
-      tarefa.classList.toggle("aberta");
-    });
+  carregarTarefas();
+
+  // POST — criar tarefa
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    const botao = form.querySelector('button');
+    botao.disabled = true;
+
+    const titulo = document.getElementById('titulo').value;
+    const descricao = document.getElementById('descricao').value;
+    const categoriaId = document.getElementById('categoria').value;
+
+    fetch('http://localhost:3000/tarefas', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        titulo,
+        descricao,
+        status: 'a fazer',
+        categoria_id: categoriaId || null
+      })
+    })
+      .then(() => {
+        carregarTarefas();
+        form.reset();
+        botao.disabled = false;
+      })
+      .catch(err => {
+        console.error('Erro no POST:', err);
+        botao.disabled = false;
+      });
   });
 
-  // MARCAR COMO CONCLUÍDA
-  const checks = document.querySelectorAll(".check");
+  // ABRIR / FECHAR DESCRIÇÃO 
+  listaContainer.addEventListener('click', (event) => {
+    const tarefa = event.target.closest('.tarefa');
+    if (!tarefa) return;
 
-  checks.forEach(function (check) {
-    check.addEventListener("click", function (event) {
-      event.stopPropagation();
+    // impede abrir ao clicar nos botões
+    if (
+      event.target.closest('.check') ||
+      event.target.closest('.excluir')
+    ) {
+      return;
+    }
 
-      const tarefa = check.closest(".tarefa");
-      tarefa.classList.toggle("concluida");
-    });
+    tarefa.classList.toggle('aberta');
   });
 
-  // EXCLUIR TAREFA
-  const botoesExcluir = document.querySelectorAll(".excluir");
+  // DELETE — excluir tarefa
+  listaContainer.addEventListener('click', (event) => {
+  const botaoExcluir = event.target.closest('.excluir');
+  if (!botaoExcluir) return;
 
-  botoesExcluir.forEach(function (botao) {
-    botao.addEventListener("click", function (event) {
-      event.stopPropagation();
+  event.stopPropagation();
 
-      const tarefa = botao.closest(".tarefa");
-      tarefa.remove();
+  const tarefa = botaoExcluir.closest('.tarefa');
+  const id = tarefa.dataset.id;
 
-      // verifica mensagens após excluir
-      verificarMensagens();
-    });
+  if (!id) return;
+
+  fetch(`http://localhost:3000/tarefas/${id}`, {
+    method: 'DELETE'
+  })
+    .then(() => {
+      carregarTarefas(); // atualiza a lista
+    })
+    .catch(err => console.error('Erro no DELETE:', err));
   });
 
-  // verifica ao carregar a página
-  verificarMensagens();
+
+  // PUT — marcar como concluída / pendente
+  listaContainer.addEventListener('click', (event) => {
+  const botaoCheck = event.target.closest('.check');
+  if (!botaoCheck) return;
+
+  event.stopPropagation();
+
+  const tarefaElement = botaoCheck.closest('.tarefa');
+  const tarefaId = tarefaElement.dataset.id;
+
+  const estaConcluida = tarefaElement.classList.contains('concluida');
+
+  const novoStatus = estaConcluida ? 'a fazer' : 'concluída';
+
+  fetch(`http://localhost:3000/tarefas/${tarefaId}/status`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ status: novoStatus })
+  })
+    .then(() => {
+      tarefaElement.classList.toggle('concluida');
+    })
+    .catch(err => console.error('Erro no PUT:', err));
+});
 
 });

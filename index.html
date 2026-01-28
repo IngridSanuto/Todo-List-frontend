@@ -6,7 +6,7 @@
   <title>To-do list</title>
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <script src="script.js"></script>
+  <script src="script.js" defer></script>
 </head>
 <body>
 
@@ -15,59 +15,30 @@
   <!-- CARD DA LISTA DE TAREFAS -->
   <section id="lista-tarefas">
 
-      <header class="card-header">
-        <h2>Minha To-do List</h2>
-      </header>
+  <header class="card-header">
+    <h2>Minha To-do List</h2>
+  </header>
 
-    <div class="card">
+  <div class="card">
+
+    <!-- CONTAINER controlado pelo JS -->
+    <div class="lista-tarefas" id="lista-tarefas-container">
 
       <p class="lista-vazia">
-        Nenhuma tarefa cadastrada 
+        Nenhuma tarefa cadastrada
       </p>
- 
-      <div class="lista tarefas">
 
-        <!-- exemplo de tarefa concluída -->
-        
-        <article class="tarefa concluida">
-          <button class="check" aria-label="Marcar como concluída"></button>
-
-          <div class="conteudo">
-            <h3 class="titulo">Estudar HTML</h3>
-
-            <p class="descricao">
-              Revisar estrutura semântica, formulários e boas práticas de HTML.
-            </p>
-          </div>
-
-          <span class="categoria">Estudos</span>
-          <button class="excluir" aria-label="Excluir tarefa"><i class="fa-solid fa-trash-can"></i></button>
-        </article>
-
-        <!-- exemplo de tarefa NÃO concluída -->
-        <article class="tarefa">
-          <button class="check" aria-label="Marcar como concluída"></button>
-          
-          <div class="conteudo">
-            <h3 class="titulo">Consulta Medica, dia 10/02</h3>
-
-            <p class="descricao">
-              exame de sangue, ás 9h da manhã, no postinho da cidade
-            </p>
-         </div>
-
-         <span class="categoria">Saúde</span>
-         <button class="excluir" aria-label="Excluir tarefa" ><i class="fa-solid fa-trash-can"></i></button>
-       </article>
-
-       <p class="aviso-scroll">
-          Para ver as demais tarefas, role o card para baixo ⬇️
-       </p>
-
-      </div>
+      <!-- as tarefas virão do backend via JavaScript -->
 
     </div>
-  </section>
+
+    <p class="aviso-scroll">
+      Para ver as demais tarefas, role o card para baixo ⬇️
+    </p>
+
+  </div>
+</section>
+
 
   <!-- CARD DO FORMULÁRIO -->
   <section id="formulario-tarefas">
@@ -75,7 +46,7 @@
 
       <h2>Criar Tarefa</h2>
 
-      <form>
+      <form id="form-tarefa">
 
         <label for="titulo">Título</label>
         <input type="text" id="titulo" required>
@@ -84,13 +55,14 @@
         <textarea id="descricao" required></textarea>
 
         <label for="categoria">Categoria</label>
-        <select id="categoria">
-          <option>Estudos</option>
-          <option>Saúde</option>
-          <option>Organização</option>
+        <select id="categoria">     
+          <option value="">Selecione</option>
+          <option value="1">Estudos</option>
+          <option value="2">Saúde</option>
+          <option value="3">Organização</option>
         </select>
 
-        <button type="submit">Salvar</button>
+        <button type="submit">Criar tarefa</button>
 
       </form>
 
