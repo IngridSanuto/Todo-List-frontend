@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const avisoScroll = document.querySelector('.aviso-scroll');
   const mensagemVazia = document.querySelector('.lista-vazia');
   const form = document.getElementById('form-tarefa');
-  const API_URL = 'https://todo-list-frontend-six-zeta.vercel.app/'
+  const API_URL = 'https://api-to-do-list-ysxa.onrender.com'
 
   // GET — carregar tarefas
   function carregarTarefas() {
