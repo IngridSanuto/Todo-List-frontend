@@ -4,10 +4,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const avisoScroll = document.querySelector('.aviso-scroll');
   const mensagemVazia = document.querySelector('.lista-vazia');
   const form = document.getElementById('form-tarefa');
+  const API_URL = 'https://todo-list-frontend-six-zeta.vercel.app/'
 
   // GET — carregar tarefas
   function carregarTarefas() {
-    fetch('https://todo-list-frontend-six-zeta.vercel.app/tarefas')
+    fetch(`${API_URL}/tarefas`)
       .then(res => res.json())
       .then(tarefas => {
         listaContainer.innerHTML = '';
@@ -68,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const descricao = document.getElementById('descricao').value;
     const categoriaId = document.getElementById('categoria').value;
 
-    fetch('https://todo-list-frontend-six-zeta.vercel.app/tarefas', {
+    fetch(`${API_URL}/tarefas`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -117,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (!id) return;
 
-  fetch(`https://todo-list-frontend-six-zeta.vercel.app/tarefas/${id}`, {
+  fetch(`${API_URL}/tarefas/${id}`, {
     method: 'DELETE'
   })
     .then(() => {
@@ -141,7 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const novoStatus = estaConcluida ? 'a fazer' : 'concluída';
 
-  fetch(`https://todo-list-frontend-six-zeta.vercel.app/tarefas/${tarefaId}/status`, {
+  fetch(`${API_URL}/tarefas/${tarefaId}/status`, {
     method: 'PATCH',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ status: novoStatus })
